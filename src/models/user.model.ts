@@ -44,6 +44,23 @@ export class UserStore {
         }
     }
 
+    async show_by_user_name(user_name: string): Promise<User> {
+        try {
+            // get connection
+            const connection = await client.connect();
+            // setup query
+            const query = 'SELECT * FROM users WHERE user_name=($1)';
+            // excute the query
+            const result = await connection.query(query, [user_name]);
+            // end connection
+            connection.release();
+
+            return result.rows[0];
+        } catch (error) {
+            throw new Error(`can not get user ${user_name}. Error: ${error}`);
+        }
+    }
+
     async create(user: User): Promise<User> {
         try {
             // Password hasing
