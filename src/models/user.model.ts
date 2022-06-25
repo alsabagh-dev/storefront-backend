@@ -105,7 +105,7 @@ export class UserStore {
             // get connection
             const connection = await client.connect();
             // setup query
-            const query = 'DELETE FROM user WHERE id=($1) RETURNING *';
+            const query = 'DELETE FROM users WHERE id=($1) RETURNING *';
             // excute the query
             const result = await connection.query(query, [id]);
             // end connection
