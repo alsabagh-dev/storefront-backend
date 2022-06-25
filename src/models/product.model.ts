@@ -80,7 +80,7 @@ export class ProductStore {
             // get connection
             const connection = await client.connect();
             // setup query
-            const query = 'DELETE FROM products WHERE id=($1)';
+            const query = 'DELETE FROM products WHERE id=($1) returning *';
             // excute the query
             const result = await connection.query(query, [id]);
             // end connection
