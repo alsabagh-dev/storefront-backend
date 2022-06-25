@@ -57,7 +57,6 @@ export class UserStore {
             const result = await connection.query(query, [user.first_name, user.last_name, user.user_name ,hashed_pass]);
             // end connection
             connection.release();
-            console.log(result);
             
             return result.rows[0];
         } catch (error) {
