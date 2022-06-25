@@ -10,6 +10,8 @@ const {
     POSTGRES_TEST_DB,
     POSTGRES_USER,
     POSTGRES_PASSWORD,
+    BCRYPT_PASSWORD,
+    SALT_ROUNDS,
 } = process.env;
 
 export default {
@@ -20,4 +22,6 @@ export default {
     db_test_name: POSTGRES_TEST_DB,
     db_user: POSTGRES_USER,
     db_passwoed: POSTGRES_PASSWORD,
+    bcrypt_password: BCRYPT_PASSWORD,
+    bcrypt_salt: SALT_ROUNDS,
 };
