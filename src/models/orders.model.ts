@@ -88,7 +88,47 @@ export class OrderStore {
             throw new Error(`can not get order ${id}. Error: ${error}`);
         }
     }
+ 
+    async show_by_user(user_id: string): Promise<Order[]> {
+        try {
+            const productStore = new ProductStore();
+            const orders: Order[] = [];
+            // get connection
+            const connection = await client.connect();
+            // Get orders
+            // setup query
+            let query = 'Select * from orders where user_id = $1';
+            // excute the query
+            const result_orders =  (await connection.query(query, [user_id])).rows;
+            for (const result_order of result_orders) {
+                const order: Order = {
+                    id: result_order.id,
+                    user_id: result_order.user_id,
+                    status: result_order.status,
+                    products: [],
+                    quantites: []
+                }
+                // Get Products and quantites
+                query = `Select * from orders inner join order_products
+                on orders.id = order_products.order_id where order_id = $1`;
+                const results = (await connection.query(query, [order.id])).rows;
+                for (const result of results) {
+                    order.quantites.push(parseInt(result.quantity));
+                    order.products.push(await productStore.show(result.product_id));
+                }
+                orders.push(order);
+            }
+            
 
+            // end connection
+            connection.release();
+
+            return orders;
+        } catch (error) {
+            throw new Error(`can not get orders for user ${user_id}. Error: ${error}`);
+        }
+    }
+ 
     async create(user: User, order: Order): Promise<Order> {
         try {
             const productStore = new ProductStore();

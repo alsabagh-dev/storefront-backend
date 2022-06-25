@@ -79,7 +79,7 @@ describe('Order Model', () => {
         expect(result.length).toBeGreaterThan(0);
     });
 
-    it('show method should return the correct product', async () => {
+    it('show method should return the correct order', async () => {
         const insert_result = await store.create(users[2], orders[2]);
         const select_result = await store.show('' + insert_result.id);
         expect(select_result?.user_id as string).toEqual(''+users[2].id?.toString());
@@ -87,7 +87,15 @@ describe('Order Model', () => {
         
     });
 
-    it('edit method should update the correct product', async () => {
+    it('show_by_user method should return the correct orders', async () => {
+        await store.create(users[8], orders[2]);
+        await store.create(users[8], orders[3]);
+        await store.create(users[8], orders[4]);
+        const select_result = await store.show_by_user('' + users[8].id);
+        expect(select_result.length ).toEqual(3);
+    });
+
+    it('edit method should update the correct order', async () => {
         const insert_result = await store.create(users[5], orders[5]);
         insert_result.status = true;
         insert_result.products = [];
