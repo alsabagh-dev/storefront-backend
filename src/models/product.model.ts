@@ -17,7 +17,7 @@ export class ProductStore {
             const result = await connection.query(query);
             // end connection
             connection.release();
-
+            
             return result.rows;
         } catch (error) {
             throw new Error(`Can not get products. Error: ${error}`);
@@ -63,7 +63,7 @@ export class ProductStore {
             // get connection
             const connection = await client.connect();
             // setup query
-            const query = 'update products SET name=($2), price=($3) WHERE id=($1)';
+            const query = 'update products SET name=($2), price=($3) WHERE id=($1) returning *';
             // excute the query
             const result = await connection.query(query, [product.id, product.name, product.price]);
             // end connection
