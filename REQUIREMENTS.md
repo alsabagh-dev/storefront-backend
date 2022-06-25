@@ -47,10 +47,10 @@ These are the notes from a meeting with the frontend developer that describe wha
 Table: Products (id:serial, name:varchar, price:decimal)
 
 #### Users
-Table: Users (id:serial, firstName:varchar, lastName:varchar, password:varchar)
+Table: Users (id:serial, firstName:varchar, lastName:varchar, password:text)
 
 #### Orders
-Table: Orders (id:serial, status:boolean, user_id:integer[foreign key to Users table])
+Table: Orders (id:serial, status:boolean, user_id:bigint[foreign key to Users table])
 
 #### Orders_products
-Table: Orders_products (id:serial,  quantity: integer, order_id:integer[foreign key to Orders table],  product_id:integer[foreign key to Products table])
+Table: Orders_products (id:serial,  quantity: integer, order_id:bigint[foreign key to Orders table],  product_id:bigint[foreign key to Products table])
