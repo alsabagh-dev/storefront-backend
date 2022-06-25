@@ -40,3 +40,17 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+
+## DB tables
+
+#### Products
+Table: Products (id:serial, name:varchar, price:decimal)
+
+#### Users
+Table: Users (id:serial, firstName:varchar, lastName:varchar, password:varchar)
+
+#### Orders
+Table: Orders (id:serial, status:boolean, user_id:integer[foreign key to Users table])
+
+#### Orders_products
+Table: Orders_products (id:serial,  quantity: integer, order_id:integer[foreign key to Orders table],  product_id:integer[foreign key to Products table])
