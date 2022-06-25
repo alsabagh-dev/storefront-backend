@@ -52,5 +52,5 @@ Table: Users (id:serial, firstName:varchar, lastName:varchar, password:text)
 #### Orders
 Table: Orders (id:serial, status:boolean, user_id:bigint[foreign key to Users table])
 
-#### Orders_products
-Table: Orders_products (id:serial,  quantity: integer, order_id:bigint[foreign key to Orders table],  product_id:bigint[foreign key to Products table])
+#### Order_products
+Table: Order_products (id:serial,  quantity: integer, order_id:bigint[foreign key to Orders table],  product_id:bigint[foreign key to Products table])
