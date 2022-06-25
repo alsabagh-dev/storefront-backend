@@ -3,9 +3,9 @@ import hash from '../utls/hash.utl';
 
 export type User = {
     id?: number;
-    firstName: string;
-    lastName: string;
-    userName: string;
+    first_name: string;
+    last_name: string;
+    user_name: string;
     password?: string;
 }
 
@@ -52,15 +52,16 @@ export class UserStore {
             // get connection
             const connection = await client.connect();
             // setup query
-            const query = 'INSERT INTO users (firstName, lastName, username, password) VALUES($1, $2, $3, $4) RETURNING *';
+            const query = 'INSERT INTO users (first_name, last_name, user_name, password) VALUES($1, $2, $3, $4) RETURNING *';
             // excute the query
-            const result = await connection.query(query, [user.firstName, user.lastName, user.userName ,hashed_pass]);
+            const result = await connection.query(query, [user.first_name, user.last_name, user.user_name ,hashed_pass]);
             // end connection
             connection.release();
-
+            console.log(result);
+            
             return result.rows[0];
         } catch (error) {
-            throw new Error(`can not create new user ${user.firstName}. Error: ${error}`);
+            throw new Error(`can not create new user ${user.first_name}. Error: ${error}`);
         }
     }
 
@@ -71,9 +72,9 @@ export class UserStore {
             // get connection
             const connection = await client.connect();
             // setup query
-            const query = 'update users SET firstName=($2), lastName=($3) WHERE id=($1) RETURNING *';
+            const query = 'update users SET first_name=($2), last_name=($3) WHERE id=($1) RETURNING *';
             // excute the query
-            const result = await connection.query(query, [user.id, user.firstName, user.lastName]);
+            const result = await connection.query(query, [user.id, user.first_name, user.last_name]);
             // end connection
             connection.release();
 
