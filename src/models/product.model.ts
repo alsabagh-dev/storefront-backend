@@ -1,7 +1,7 @@
 import client from '../database/pool.db';
 
 export type Product = {
-    id: number;
+    id?: number;
     name: string;
     price: number;
 }
@@ -46,7 +46,7 @@ export class ProductStore {
             // get connection
             const connection = await client.connect();
             // setup query
-            const query = 'INSERT INTO products (name, price) VALUES($1, $2)';
+            const query = 'INSERT INTO products (name, price) VALUES($1, $2) returning *';
             // excute the query
             const result = await connection.query(query, [product.name, product.price]);
             // end connection
