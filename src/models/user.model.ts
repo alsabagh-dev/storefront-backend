@@ -1,7 +1,5 @@
 import client from '../database/pool.db';
-import bcrypt from 'bcrypt';
-import config  from '../environment.conf';
-
+import hash from '../utls/hash.utl';
 
 export type User = {
     id?: number;
@@ -49,17 +47,14 @@ export class UserStore {
     async create(user: User): Promise<User> {
         try {
             // Password hasing
-            const hash = bcrypt.hashSync(
-                user.password+(config.bcrypt_password as string),
-                parseInt(config.bcrypt_password as string)
-            );
+            const hashed_pass = hash(user.password as string);
 
             // get connection
             const connection = await client.connect();
             // setup query
             const query = 'INSERT INTO users (firstName, lastName, username, password) VALUES($1, $2, $3, $4) RETURNING *';
             // excute the query
-            const result = await connection.query(query, [user.firstName, user.lastName, user.userName ,hash]);
+            const result = await connection.query(query, [user.firstName, user.lastName, user.userName ,hashed_pass]);
             // end connection
             connection.release();
 
