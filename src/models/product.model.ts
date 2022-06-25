@@ -58,6 +58,23 @@ export class ProductStore {
         }
     }
 
+    async edit(product: Product): Promise<Product> {
+        try {
+            // get connection
+            const connection = await client.connect();
+            // setup query
+            const query = 'update products SET name=($2), price=($3) WHERE id=($1)';
+            // excute the query
+            const result = await connection.query(query, [product.id, product.name, product.price]);
+            // end connection
+            connection.release();
+
+            return result.rows[0];
+        } catch (error) {
+            throw new Error(`can not update product ${product.id}. Error: ${error}`);
+        }
+    }
+
     async delete(id: string): Promise<Product> {
         try {
             // get connection
