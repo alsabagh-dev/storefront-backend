@@ -35,8 +35,8 @@ you must create 2 databases one for development and one for test
 
 #### grant user privilages for the DBs
 ```
-grant all privileges on database store to user_name;
-grant all privileges on database store_test to user_name;
+grant all privileges on database store to store_usr;
+grant all privileges on database store_test to store_usr;
 ```
 
 
