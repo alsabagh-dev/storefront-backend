@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { User, UserStore } from '../models/user.model';
+import  jwt from 'jsonwebtoken';
+import config from '../environment.conf';
 
 const store = new UserStore();
 
@@ -54,7 +56,8 @@ export default class UserController {
             }
             try {
                 const user = await store.create(new_user);
-                res.json(user);
+                const token = jwt.sign({ user: user }, ''+config.tkn_scrt);
+                res.json(token);
             } catch (error) {
                 console.error(error);
 
