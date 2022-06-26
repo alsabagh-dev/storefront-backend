@@ -17,7 +17,8 @@ export default class OrderController{
             console.error(error);
 
             res.status(500);
-            res.send(`Sorry can not get orders, please try again later`);
+            res.send(`Sorry can not get orders, please try again later
+            ${error}`);
         }
     }
 
@@ -40,7 +41,7 @@ export default class OrderController{
                 user_id: ''+order_user.id ,
                 status: status,
                 products: order_products,
-                quantites:quantites
+                quantites:[...quantites]
             }
             const created = await orderStore.create(order_user, order);
             res.json(created);
@@ -48,7 +49,8 @@ export default class OrderController{
             console.error(error);
 
             res.status(500);
-            res.send(`Sorry can not create orders, please try again later`);
+            res.send(`Sorry can not create orders, please try again later
+            ${error}`);
         }
 
     }

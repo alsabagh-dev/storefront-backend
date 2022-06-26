@@ -157,7 +157,7 @@ export class OrderStore {
                     const row = (await connection.query(query,
                         [quantity, result_order.id, product.id])).rows[0];
                     new_order.products.push(await productStore.show(row.product_id));
-                    new_order.products.push(row.quantity);
+                    new_order.quantites.push(row.quantity);
                 
             }
 
