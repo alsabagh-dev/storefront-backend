@@ -24,3 +24,16 @@ TOKEN_SECRET=<VALUE>
 ```
 ### test
 to run test `npm run test`
+
+### create user
+you can create user on '/users/' [POST]
+structure
+```
+    {
+        "first_name": "<value>",
+        "last_name": "<value>",
+        "user_name": "<value>",
+        "password": "<value>"
+    }
+```
+user_name must be unique per uesr
