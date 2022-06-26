@@ -8,7 +8,6 @@ const sign_in = async (req: Request, res: Response) => {
     try {
         const u = await authenticate(user_name, password)
         const token = jwt.sign({ user: u }, ''+config.tkn_scrt);
-        console.log(token);
         
         res.json(token)
     } catch(error) {
@@ -24,7 +23,6 @@ const verify_middelware =  async (req: Request, res: Response, next : NextFuncti
         const authorizationHeader = ''+req.headers.authorization;
         const token = authorizationHeader.split(' ')[1];
         const decoded = jwt.verify(token, ''+config.tkn_scrt);
-        console.log(decoded);
         
         next()
     } catch (error) {
