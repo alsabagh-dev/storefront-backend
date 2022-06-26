@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start:watch": "nodemon src/server.ts",
+    "start:dev": "nodemon src/server.ts",
+    "prestart": "tsc",
     "start": "node dist/server.js",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "pretest": "ENV=test db-migrate --env test  up",
