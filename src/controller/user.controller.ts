@@ -21,6 +21,7 @@ export default class UserController {
         const user_id = req.params.id;
         try {
             const user = await store.show(user_id);
+            if(!user) throw new Error('not found');
             res.json(user);
         } catch (error) {
             console.error(error);
