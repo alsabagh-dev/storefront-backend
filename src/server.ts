@@ -4,7 +4,7 @@ import product_router from './routes/product.route';
 import order_router from './routes/order.route';
 
 const app: express.Application = express()
-const address: string = "0.0.0.0:3000"
+const address: string = "http://0.0.0.0:3000"
 
 app.use(express.json())
 
