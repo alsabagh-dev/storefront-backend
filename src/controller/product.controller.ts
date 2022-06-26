@@ -11,7 +11,8 @@ export default class ProductController {
             console.error(error);
 
             res.status(500);
-            res.send(`Sorry can not get products, please try again later`);
+            res.send(`Sorry can not get products, please try again later
+                ${error}`);
         }
     }
 
@@ -23,7 +24,8 @@ export default class ProductController {
         } catch (error) {
             console.error(error);
             res.status(404);
-            res.send(`Sorry can not find product ${product_id}`);
+            res.send(`Sorry can not find product ${product_id}
+            ${error}`);
         }
     }
 
@@ -44,7 +46,8 @@ export default class ProductController {
                 console.error(error);
 
                 res.status(500);
-                res.send(`Sorry can not create products, please try again later`);
+                res.send(`Sorry can not create products, please try again later
+                ${error}`);
             }
         }
     }

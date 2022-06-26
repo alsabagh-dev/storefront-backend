@@ -12,7 +12,8 @@ export default class UserController {
             console.error(error);
 
             res.status(500);
-            res.send(`Sorry can not get users, please try again later`);
+            res.send(`Sorry can not get users, please try again later
+            ${error}`);
         }
     }
 
@@ -24,7 +25,8 @@ export default class UserController {
         } catch (error) {
             console.error(error);
             res.status(404);
-            res.send(`Sorry can not find user ${user_id}`);
+            res.send(`Sorry can not find user ${user_id}
+            ${error}`);
         }
     }
 
@@ -56,7 +58,8 @@ export default class UserController {
                 console.error(error);
 
                 res.status(500);
-                res.send(`Sorry can not create users, please try again later`);
+                res.send(`Sorry can not create users, please try again later
+                ${error}`);
             }
         }
     }
