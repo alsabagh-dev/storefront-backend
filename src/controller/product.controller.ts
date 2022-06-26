@@ -20,6 +20,8 @@ export default class ProductController {
         const product_id = req.params.id;
         try {
             const product = await store.show(product_id);
+            if(!product) throw new Error('not found');
+            
             res.json(product);
         } catch (error) {
             console.error(error);
