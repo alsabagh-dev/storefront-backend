@@ -1,4 +1,10 @@
 # Storefront Backend Project
+An API that serve an online store
+
+Practiced in this project:
+- Architect the database, its tables, and columns to fulfill the data requirements 
+- Craft a RESTful API that exposes that information to the frontend of an online store.
+
 
 ## Getting Started
 
